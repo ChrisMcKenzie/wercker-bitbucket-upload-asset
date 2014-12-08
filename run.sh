@@ -13,7 +13,7 @@ if [ ! -n "$WERCKER_BITBUCKET_UPLOAD_ASSET_FILE" ]; then
   exit 1
 fi
   
-  $pge = $WERCKER_GIT_OWNER/$WERCKER_GIT_REPOSITORY/downloads
+pge=$WERCKER_GIT_OWNER/$WERCKER_GIT_REPOSITORY/downloads
 # works like this: GET /account/signin/ -> POST /account/signin/ -> auto-redir to downloads page -> POST downloads page
   
   # GET initial csrf, dropped in the cookie, final 32 chars of the line containing that word
@@ -42,7 +42,7 @@ fi
 
   # now that we're logged-in and at the right page, upload whatever you want to your repository...
   # echo "actual upload progress should appear right now as a progress bar, be patient:"
-  curl -k -c cookies.txt -b cookies.txt --progress-bar -o /dev/null --referer "https://bitbucket.org/$pge" -L --form csrfmiddlewaretoken=$csrf --form token= --form file=@"$fil" https://bitbucket.org/$pge
+  curl -k -c cookies.txt -b cookies.txt --progress-bar -o /dev/null --referer "https://bitbucket.org/$pge" -L --form csrfmiddlewaretoken=$csrf --form token= --form file=@"$WERCKER_BITBUCKET_UPLOAD_ASSET_FILE" https://bitbucket.org/$pge
 
   echo "done? maybe. *crosses fingers* signing out, closing session!"
   curl -k -c cookies.txt -b cookies.txt --progress-bar -o /dev/null -L https://bitbucket.org/account/signout/
