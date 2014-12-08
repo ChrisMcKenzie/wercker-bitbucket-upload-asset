@@ -1,0 +1,2 @@
+wercker-bitbucket-upload-asset
+==============================
