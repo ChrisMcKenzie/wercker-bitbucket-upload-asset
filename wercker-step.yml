@@ -1,0 +1,10 @@
+name: bitbucket-upload-asset
+version: 0.0.1
+description: Upload files to bitbuckets repo downloads section
+properties:
+  user:
+    type: string
+    required: true
+  password:
+    type: string
+    required: true
