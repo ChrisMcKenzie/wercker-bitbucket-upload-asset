@@ -1,4 +1,4 @@
-if [ ! -n "$WERCKER_BITBUCKET_UPLOAD_ASSET_USER" ]; then
+if [ ! -n "$WERCKER_BITBUCKET_UPLOAD_ASSET_USERNAME" ]; then
   error 'Please specify user property'
   exit 1
 fi
@@ -25,7 +25,7 @@ fi
   
   # and login using POST, to get the final session cookies, then redirect it to the right page
   # echo "signing in with the credentials provided:"
-  curl -k -c cookies.txt -b cookies.txt --progress-bar -o /dev/null -d "username=$WERCKER_BITBUCKET_UPLOAD_ASSET_USER&password=$WERCKER_BITBUCKET_UPLOAD_ASSET_PASSWORD&submit=&next=$pge&csrfmiddlewaretoken=$csrf" --referer "https://bitbucket.org/account/signin/" -L https://bitbucket.org/account/signin/
+  curl -k -c cookies.txt -b cookies.txt --progress-bar -o /dev/null -d "username=$WERCKER_BITBUCKET_UPLOAD_ASSET_USERNAME&password=$WERCKER_BITBUCKET_UPLOAD_ASSET_PASSWORD&submit=&next=$pge&csrfmiddlewaretoken=$csrf" --referer "https://bitbucket.org/account/signin/" -L https://bitbucket.org/account/signin/
   
   csrf=$(grep csrf cookies.txt); set $csrf; csrf=$7;
   
