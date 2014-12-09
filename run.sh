@@ -1,5 +1,5 @@
 if [ ! -n "$WERCKER_BITBUCKET_UPLOAD_ASSET_USERNAME" ]; then
-  error 'Please specify user property'
+  error 'Please specify username property'
   exit 1
 fi
 
@@ -42,6 +42,7 @@ fi
 
   # now that we're logged-in and at the right page, upload whatever you want to your repository...
   # echo "actual upload progress should appear right now as a progress bar, be patient:"
+  echo "uploading file: $WERCKER_BITBUCKET_UPLOAD_ASSET_FILE"
   curl -k -c cookies.txt -b cookies.txt --progress-bar -o /dev/null --referer "https://bitbucket.org/$pge" -L --form csrfmiddlewaretoken=$csrf --form token= --form file=@"$WERCKER_BITBUCKET_UPLOAD_ASSET_FILE" https://bitbucket.org/$pge
 
   echo "done? maybe. *crosses fingers* signing out, closing session!"
